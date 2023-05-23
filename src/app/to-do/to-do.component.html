@@ -1,0 +1,29 @@
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card">
+          <div class="card-body">
+            <div class="form-group mt-4">
+              <div class="h4 d-flex justify-content-center text-primary">My To do List</div>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Add To do list" aria-label="Recipient's username"
+                       aria-describedby="button-addon2" [(ngModel)]="description">
+                <button class="btn btn-primary" type="button" id="button-addon2" (click)="addTodo()">+</button>
+              </div>
+            </div>
+            <p>{{myMassege}}</p>
+            <ul class="list-group" *ngFor="let todo of myTodoList">
+
+              <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded">
+                <input class="form-check-input me-2" type="checkbox" value="" aria-label="..."
+                       [(ngModel)]="todo.status"/>
+                <span [ngClass]="{'crossed-line': todo.status}">{{todo.description}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
