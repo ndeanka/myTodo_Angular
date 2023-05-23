@@ -1,0 +1,34 @@
+{
+  "myTodoList": [
+    {
+      "id": 1,
+      "description": "Learn Javascript",
+      "status": ""
+    },
+    {
+      "id": 2,
+      "description": "Learn DOM",
+      "status": "complete"
+    },
+    {
+      "id": 3,
+      "description": "Learn Promises",
+      "status": ""
+    },
+    {
+      "id": 4,
+      "description": "Learn JSON",
+      "status": "complete"
+    },
+    {
+      "description": "test",
+      "status": "complete",
+      "id": 8
+    },
+    {
+      "description": "Jb",
+      "status": "",
+      "id": 9
+    }
+  ]
+}

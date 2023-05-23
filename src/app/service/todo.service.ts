@@ -1,14 +1,33 @@
+import {HttpClient} from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {Task} from "../share/task";
+import {Observable} from "rxjs";
+
+
+@Injectable({
+  providedIn: 'root'
+})
 export class TodoList {
-  myTodoList = [
-    {description: "Learn Javascript", status: ""},
-    {description: "Learn DOM", status: ""},
-    {description: "Learn Promises", status: ""},
-    {description: "Learn Asncy", status: ""},
 
-  ];
+  serviceURL: string;
 
-  addTodoList(description: string, status: string) {
-    this.myTodoList.push({description: description, status: status})
+  constructor(private http: HttpClient) {
+    this.serviceURL = "http://localhost:3000/myTodoList "
+  }
 
+  addTodoList(description: Task): Observable<Task> {
+    return this.http.post<Task>(this.serviceURL, description)
+  }
+
+  getAllTodoList(): Observable<Task[]> {
+    return this.http.get<Task[]>(this.serviceURL)
+  }
+
+  deleteTodoList(description: Task): Observable<Task> {
+    return this.http.delete<Task>(this.serviceURL + '/' + description.id);
+  }
+
+  editTodoList(description: Task): Observable<Task> {
+    return this.http.put<Task>(this.serviceURL + '/' + description.id, description);
   }
 }

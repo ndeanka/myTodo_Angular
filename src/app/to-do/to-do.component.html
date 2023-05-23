@@ -1,25 +1,73 @@
-<section class="vh-100 gradient-custom">
+<!-- about.component.html -->
+
+<section class="vh-100">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col col-xl-10">
         <div class="card">
           <div class="card-body">
             <div class="form-group mt-4">
-              <div class="h4 d-flex justify-content-center text-primary">My To do List</div>
+              <div class="h4 d-flex justify-content-center text-primary">My To-do List</div>
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Add To do list" aria-label="Recipient's username"
+                <input type="text" class="form-control" placeholder="Add To-do list" aria-label="Recipient's username"
                        aria-describedby="button-addon2" [(ngModel)]="description">
                 <button class="btn btn-primary" type="button" id="button-addon2" (click)="addTodo()">+</button>
               </div>
             </div>
-            <p>{{myMassege}}</p>
-            <ul class="list-group" *ngFor="let todo of myTodoList">
 
-              <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded">
-                <input class="form-check-input me-2" type="checkbox" value="" aria-label="..."
-                       [(ngModel)]="todo.status"/>
-                <span [ngClass]="{'crossed-line': todo.status}">{{todo.description}}</span>
+
+            <!-- Tabs navs -->
+            <ul class="nav nav-tabs mb-4 pb-2" id="ex1" role="tablist">
+              <li class="nav-item" role="presentation" [routerLinkActive]="'active'">
+                <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" (click)="getAllTodoList()" role="tab"
+                   aria-controls="ex1-tabs-1" aria-selected="true" [routerLinkActive]="'active'">All</a>
               </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" (click)="activeTask()" role="tab"
+                        aria-controls="ex1-tabs-2" aria-selected="false">Active
+                </button>
+              </li>
+              <li class="nav-item" role="presentation" [routerLinkActive]="'active'">
+                <button class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" (click)="completedTask()" role="tab"
+                        aria-controls="ex1-tabs-3" aria-selected="false">Completed
+                </button>
+              </li>
+            </ul>
+            <!-- Tabs navs -->
+
+            <ul class="list-group" *ngFor="let todo of taskArr">
+              <li class="list-group-item d-flex justify-content-between align-items-center border-0 rounded-0 mb-2">
+                <div class="d-flex align-items-center">
+                  <input class="form-check-input me-2" type="checkbox" value="" aria-label="..."
+                         [(ngModel)]="todo.status"/>
+                  <span [ngClass]="{'crossed-line': todo.status}">{{todo.description}}</span>
+                </div>
+                <div>
+                  <i class="fas fa-edit text-primary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                     (click)="call(todo)"></i>
+                  <i class="fas fa-times text-primary" (click)="deleteTodoList(todo)"></i>
+                </div>
+              </li>
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                   aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="input-group p-4">
+                        <input type="text" class="form-control" placeholder="Enter task" name="task"
+                               [(ngModel)]="editTaskValue">
+                        <button class="btn btn-outline-success" type="button" data-bs-dismiss="modal"
+                                (click)="editTodoList()">Update
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </ul>
           </div>
         </div>
