@@ -1,34 +1,29 @@
 {
   "myTodoList": [
     {
-      "id": 1,
-      "description": "Learn Javascript",
-      "status": ""
+      "description": "Learing Angular",
+      "status": true,
+      "id": 12
     },
     {
-      "id": 2,
-      "description": "Learn DOM",
-      "status": "complete"
+      "description": "Learning JavaScript",
+      "status": true,
+      "id": 13
     },
     {
-      "id": 3,
-      "description": "Learn Promises",
-      "status": ""
+      "description": "Learing DOM",
+      "status": false,
+      "id": 14
     },
     {
-      "id": 4,
-      "description": "Learn JSON",
-      "status": "complete"
+      "description": "Learn React",
+      "status": false,
+      "id": 15
     },
     {
-      "description": "test",
-      "status": "complete",
-      "id": 8
-    },
-    {
-      "description": "Jb",
-      "status": "",
-      "id": 9
+      "description": "Develop To do List",
+      "status": false,
+      "id": 16
     }
   ]
 }

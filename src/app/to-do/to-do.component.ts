@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TodoList} from '../service/todo.service';
 import {Task} from "../share/task";
-import {Router} from "@angular/router";
-
 
 @Component({
   selector: 'app-to-do',
@@ -16,14 +14,9 @@ export class ToDoComponent implements OnInit {
   taskObj: Task = new Task();
   taskArr: Task[] = [];
 
-  status: string = "";
-
-  constructor(private todoService: TodoList) {
-  }
-
+  constructor(private todoService: TodoList) {}
 
   ngOnInit(): void {
-    this.taskObj = new Task();
     this.taskArr = [];
     this.getAllTodoList();
     this.editTaskValue = '';
@@ -33,40 +26,38 @@ export class ToDoComponent implements OnInit {
   addTodo(): void {
     this.taskObj.description = this.description;
     this.todoService.addTodoList(this.taskObj).subscribe(val => {
-      this.ngOnInit()
+      this.ngOnInit();
       this.description = '';
-
     }, error => {
       alert(error);
-    })
+    });
   }
 
   getAllTodoList() {
     this.todoService.getAllTodoList().subscribe(val => {
-      const active = this.taskArr = val;
+      this.taskArr = val;
     }, error => {
-      alert("Unable to get list of tasks")
-    })
+      alert("Unable to get list of tasks");
+    });
   }
 
   activeTask() {
     this.todoService.getAllTodoList().subscribe(
       val => {
-        const active = val.filter(task => task.status === ''); // Filtering the tasks
+        const active = val.filter(task => task.status === false); // Filtering the tasks
         this.taskArr = active; // Assigning the filtered tasks to taskArr
       },
       error => {
         alert("Unable to get list of tasks");
       }
     );
-
   }
 
   completedTask() {
     this.todoService.getAllTodoList().subscribe(
       val => {
-        const active = val.filter(task => task.status !== ''); // Filtering the tasks
-        this.taskArr = active; // Assigning the filtered tasks to taskArr
+         // Filtering the tasks
+        this.taskArr = val.filter(task => task.status); // Assigning the filtered tasks to taskArr
       },
       error => {
         alert("Unable to get list of tasks");
@@ -75,26 +66,39 @@ export class ToDoComponent implements OnInit {
   }
 
   editTodoList() {
-    this.taskObj.description = this.editTaskValue;
     this.todoService.editTodoList(this.taskObj).subscribe(val => {
       this.ngOnInit();
     }, error => {
-      alert("Fail to update task");
-    })
-  }
-
-  deleteTodoList(data: Task) {
-    this.todoService.deleteTodoList(data).subscribe(() => {
-      this.ngOnInit();
-    }, () => {
-      alert("Failed to delete task");
+      alert("Failed to update task");
     });
   }
+
+  updateTodoStatus(todo: any) {
+    console.log(todo)
+    this.todoService.updateStatus(todo).subscribe(() => {
+      this.ngOnInit();
+    });
+  }
+
+  deleteTodoList(todo: Task): void {
+    console.log(todo.id)
+    this.todoService.deleteTodoList(todo.id).subscribe(
+      (response) => {
+        console.log(response, '-----------')
+        this.taskArr = this.taskArr.filter(item => item.id !== todo.id);
+      },
+      error => {
+        console.log(error)
+        console.error('Failed to delete task:', error);
+        alert('Failed to delete task');
+      }
+    );
+  }
+
+
 
   call(data: Task) {
     this.taskObj = data;
     this.editTaskValue = data.description;
   }
-
-  protected readonly Task = Task;
 }
