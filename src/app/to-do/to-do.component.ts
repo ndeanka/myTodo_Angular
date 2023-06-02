@@ -44,8 +44,7 @@ export class ToDoComponent implements OnInit {
   activeTask() {
     this.todoService.getAllTodoList().subscribe(
       val => {
-        const active = val.filter(task => task.status === false); // Filtering the tasks
-        this.taskArr = active; // Assigning the filtered tasks to taskArr
+        this.taskArr = val.filter(task => !task.status);
       },
       error => {
         alert("Unable to get list of tasks");
@@ -81,7 +80,6 @@ export class ToDoComponent implements OnInit {
   }
 
   deleteTodoList(todo: Task): void {
-    console.log(todo.id)
     this.todoService.deleteTodoList(todo.id).subscribe(
       (response) => {
         console.log(response, '-----------')
