@@ -1,5 +1,3 @@
-<!-- about.component.html -->
-
 <section class="vh-30">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -38,12 +36,13 @@
             <ul class="list-group" *ngFor="let todo of taskArr">
               <li class="list-group-item d-flex justify-content-between align-items-center border-0 rounded-0 mb-2">
                 <div class="d-flex align-items-center">
-                  <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." [(ngModel)]="todo.status" (change)="updateTodoStatus(todo)"/>
+                  <input class="form-check-input me-2" type="checkbox" value="" aria-label="..."
+                         [(ngModel)]="todo.status" (change)="updateTodoStatus(todo)"/>
                   <span [ngClass]="{'crossed-line': todo.status}">{{todo.description}}</span>
 
                 </div>
                 <div>
-                  <i class="fas fa-edit text-primary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                  <i class="fas fa-edit text-primary me-2" data-bs-toggle="modal" data-bs-target="exampleModal"
                      (click)="call(todo)"></i>
                   <i class="fas fa-times text-primary" (click)="deleteTodoList(todo)"></i>
                 </div>

@@ -8,13 +8,15 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
 import {AboutComponent} from './about/about.component';
 import {RouterModule, Routes} from "@angular/router";
-import { ErrorComponent } from './error/error.component';
+import {ErrorComponent} from './error/error.component';
+import {CountactComponent} from './countact/countact.component';
 
 const appRoute: Routes = [
   // {path: '', component: ToDoComponent},
   {path: '', redirectTo: 'Home', pathMatch: 'full'},
   {path: 'Home', component: ToDoComponent},
   {path: 'About', component: AboutComponent},
+  {path: 'Contact', component: CountactComponent},
   {path: '**', component: ErrorComponent}
 ];
 
@@ -24,7 +26,8 @@ const appRoute: Routes = [
     AppComponent,
     ToDoComponent,
     AboutComponent,
-    ErrorComponent
+    ErrorComponent,
+    CountactComponent
   ],
   imports: [
     BrowserModule,

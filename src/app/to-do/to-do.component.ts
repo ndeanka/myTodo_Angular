@@ -14,7 +14,8 @@ export class ToDoComponent implements OnInit {
   taskObj: Task = new Task();
   taskArr: Task[] = [];
 
-  constructor(private todoService: TodoList) {}
+  constructor(private todoService: TodoList) {
+  }
 
   ngOnInit(): void {
     this.taskArr = [];
@@ -55,7 +56,7 @@ export class ToDoComponent implements OnInit {
   completedTask() {
     this.todoService.getAllTodoList().subscribe(
       val => {
-         // Filtering the tasks
+        // Filtering the tasks
         this.taskArr = val.filter(task => task.status); // Assigning the filtered tasks to taskArr
       },
       error => {
@@ -92,7 +93,6 @@ export class ToDoComponent implements OnInit {
       }
     );
   }
-
 
 
   call(data: Task) {
