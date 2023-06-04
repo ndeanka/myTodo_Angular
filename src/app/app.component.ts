@@ -13,7 +13,7 @@ export class AppComponent implements OnInit{
   }
   ngOnInit(){
     this.activatedRoute.fragment.subscribe((val)=> {
-      console.log(val);
+      // console.log(val);
       this.jumpTo(val);
     })
       
