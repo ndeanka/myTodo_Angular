@@ -29,6 +29,7 @@ export class ToDoComponent implements OnInit {
     this.todoService.addTodoList(this.taskObj).subscribe(val => {
       this.ngOnInit();
       this.description = '';
+      console.log(this.description)
     }, error => {
       alert(error);
     });

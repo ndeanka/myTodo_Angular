@@ -13,6 +13,7 @@ export class TodoList {
 
   constructor(private http: HttpClient) {
     this.serviceURL = "http://localhost:3000/myTodoList/"
+    this.serviceURL = 'https://todolist-f6b44-default-rtdb.firebaseio.com/todolist.json'
   }
 
   addTodoList(description: Task): Observable<Task> {
