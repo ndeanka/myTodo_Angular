@@ -35,13 +35,26 @@ export class ToDoComponent implements OnInit {
     });
   }
 
+  // getAllTodoList() {
+  //   this.todoService.getAllTodoList().subscribe((task: Task[]) => {
+  //     this.taskArr = task;
+  //   }, error => {
+  //     alert("Unable to get list of tasks");
+  //   });
+  // }
+
   getAllTodoList() {
-    this.todoService.getAllTodoList().subscribe(val => {
-      this.taskArr = val;
-    }, error => {
-      alert("Unable to get list of tasks");
-    });
+    this.todoService.getAllTodoList().subscribe(
+      (tasks: Task[]) => {
+        this.taskArr = Object.values(tasks);
+      },
+      (error) => {
+        console.log('Unable to get list of tasks:', error);
+        alert('Unable to get list of tasks');
+      }
+    );
   }
+
 
   activeTask() {
     this.todoService.getAllTodoList().subscribe(
