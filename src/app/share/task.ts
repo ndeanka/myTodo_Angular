@@ -1,5 +1,5 @@
 export class Task {
   description : string = '';
-  status : boolean = false;
+  status!: boolean;
   id: string = '';
 }

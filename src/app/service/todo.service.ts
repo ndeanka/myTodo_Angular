@@ -1,8 +1,7 @@
-import {HttpClient} from "@angular/common/http";
-import {Injectable} from "@angular/core";
-import {Task} from "../share/task";
-import {Observable, map} from "rxjs";
-
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Task } from "../share/task";
+import { Observable, map } from "rxjs";
 
 @Injectable({ 
   providedIn: 'root'
@@ -10,14 +9,14 @@ import {Observable, map} from "rxjs";
 export class TodoList {
 
   serviceURL: string;
+  
 
   constructor(private http: HttpClient) {
-    // this.serviceURL = "http://localhost:3000/myTodoList/"   
-    this.serviceURL = 'https://todolist-f6b44-default-rtdb.firebaseio.com/todolist.json'
+    this.serviceURL = 'https://todolist-f6b44-default-rtdb.firebaseio.com/todolist.json';
   }
 
   addTodoList(description: Task): Observable<Task> {
-    return this.http.post<Task>(this.serviceURL, description)
+    return this.http.post<Task>(this.serviceURL, description);
   }
 
   getAllTodoList(): Observable<Task[]> {
@@ -29,30 +28,26 @@ export class TodoList {
             todoList.push({ ...res[key], id: key });
           }
         }
-        console.log(todoList);
         return todoList;
       })
     );
   }
   
   deleteTodoList(id: string): Observable<void> {
-    // const url = `${this.serviceURL}/${id}`;
-    const url = 'https://todolist-f6b44-default-rtdb.firebaseio.com/todolist/'+id+'.json';
-
+    const url = `https://todolist-f6b44-default-rtdb.firebaseio.com/todolist/${id}.json`;
     return this.http.delete<void>(url);
   }
   
-
   editTodoList(description: Task): Observable<Task> {
-    return this.http.put<Task>(this.serviceURL + '/' + description.id, description);
+    const url = `${this.serviceURL}/${description.id}.json`;
+    return this.http.put<Task>(url, description);
   }
-
-  // updateStatus(status: Task): Observable<Task> {
-  //   return this.http.put<Task>(`${this.serviceURL}/${status.id}`, status);
-  // }
-
-  updateStatus(status: Task): Observable<Task> {
-    const url = `${this.serviceURL}/${status.id}.json`;
+  
+  updateStatus(id: string, status: Task): Observable<Task> {
+    const url = `https://todolist-f6b44-default-rtdb.firebaseio.com/todolist/${id}.json`;
     return this.http.put<Task>(url, status);
   }
+
+
+  
 }
