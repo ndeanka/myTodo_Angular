@@ -36,7 +36,7 @@ const appRoute: Routes = [
     RouterModule.forRoot(appRoute),
     ReactiveFormsModule
   ],
-  providers: [TodoList],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

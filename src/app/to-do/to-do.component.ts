@@ -15,7 +15,7 @@ export class ToDoComponent implements OnInit {
   taskArr: Task[] = [];
 
   constructor(private todoService: TodoList) {
-  }
+  } 
 
   ngOnInit(): void {
     this.taskArr = [];
@@ -29,7 +29,6 @@ export class ToDoComponent implements OnInit {
     this.todoService.addTodoList(this.taskObj).subscribe(val => {
       this.ngOnInit();
       this.description = '';
-      console.log(this.description)
     }, error => {
       alert(error);
     });
@@ -94,10 +93,24 @@ export class ToDoComponent implements OnInit {
     });
   }
 
+  // updateTaskStatus(task: Task, newStatus: boolean) {
+  //   task.status = newStatus;
+
+  //   this.todoService.updateStatus(task).subscribe(
+  //     (updatedTask: Task) => {
+  //       console.log('Task status updated successfully:', updatedTask);
+  //       // Perform any additional actions after successful status update
+  //     },
+  //     (error) => {
+  //       console.log('Error updating task status:', error);
+  //       // Handle error case
+  //     }
+  //   );
+  // }
+
   deleteTodoList(todo: Task): void {
     this.todoService.deleteTodoList(todo.id).subscribe(
-      (response) => {
-        console.log(response, '-----------')
+      (response) => { 
         this.taskArr = this.taskArr.filter(item => item.id !== todo.id);
       },
       error => {
@@ -107,6 +120,20 @@ export class ToDoComponent implements OnInit {
       }
     );
   }
+
+// deleteTodoList(id: string | number) {
+//   const taskId = typeof id === 'string' ? +id : id; // Convert id to a number if it is a string
+
+//   this.todoService.deleteTodoList(taskId).subscribe(
+//     () => {
+//       console.log('Task deleted successfully.');
+//     },
+//     (error) => {
+//       console.log('Error deleting task:', error);
+//     }
+//   );
+// }
+  
 
 
   call(data: Task) {
