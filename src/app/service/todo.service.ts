@@ -2,13 +2,15 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Task } from "../share/task";
 import { Observable, map } from "rxjs";
+import { environment } from "src/environments/environment.development";
 
 @Injectable({ 
   providedIn: 'root'
 })
 export class TodoList {
 
-  serviceURL: string;
+  // serviceURL: string;
+  private serviceURL = environment.apiUrl;
   
 
   constructor(private http: HttpClient) {
@@ -45,9 +47,9 @@ export class TodoList {
   
   updateStatus(id: string, status: Task): Observable<Task> {
     const url = `https://todolist-f6b44-default-rtdb.firebaseio.com/todolist/${id}.json`;
+    // const url =`${this.serviceURL}/${id}.json`;
     return this.http.put<Task>(url, status);
   }
 
-
-  
 }
+ 

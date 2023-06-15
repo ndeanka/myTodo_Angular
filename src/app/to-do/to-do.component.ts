@@ -44,6 +44,9 @@ export class ToDoComponent implements OnInit {
       error => {
         console.log('Unable to get list of tasks:', error);
         alert('Unable to get list of tasks');
+      },
+      () => {
+        console.log('Done loading tasks');
       }
     );
   }
