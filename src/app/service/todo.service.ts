@@ -37,8 +37,8 @@ export class TodoList {
   }
   
   deleteTodoList(id: string): Observable<void> {
-    // const url = `https://todolist-f6b44-default-rtdb.firebaseio.com/todolist/${id}.json`;
-    const url = `${this.serviceURL}/todolist/${id}.json`;
+    const url = `https://todolist-f6b44-default-rtdb.firebaseio.com/todolist/${id}.json`;
+    // const url = `${this.serviceURL}/todolist/${id}.json`;
     return this.http.delete<void>(url);
   }
   
