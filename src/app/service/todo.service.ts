@@ -14,7 +14,8 @@ export class TodoList {
   
 
   constructor(private http: HttpClient) {
-    this.serviceURL = 'https://todolist-f6b44-default-rtdb.firebaseio.com/todolist.json';
+    // this.serviceURL = 'https://todolist-f6b44-default-rtdb.firebaseio.com/todolist.json';
+    this.serviceURL = `${this.serviceURL}/todolist.json`;
   }
 
   addTodoList(description: Task): Observable<Task> {
@@ -36,7 +37,8 @@ export class TodoList {
   }
   
   deleteTodoList(id: string): Observable<void> {
-    const url = `https://todolist-f6b44-default-rtdb.firebaseio.com/todolist/${id}.json`;
+    // const url = `https://todolist-f6b44-default-rtdb.firebaseio.com/todolist/${id}.json`;
+    const url = `${this.serviceURL}/todolist/${id}.json`;
     return this.http.delete<void>(url);
   }
   
@@ -47,7 +49,7 @@ export class TodoList {
   
   updateStatus(id: string, status: Task): Observable<Task> {
     const url = `https://todolist-f6b44-default-rtdb.firebaseio.com/todolist/${id}.json`;
-    // const url =`${this.serviceURL}/${id}.json`;
+    // const url = `${this.serviceURL}/todolist/${id}.json`;
     return this.http.put<Task>(url, status);
   }
 
