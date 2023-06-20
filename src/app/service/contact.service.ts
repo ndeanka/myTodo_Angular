@@ -7,7 +7,8 @@ import { Contact } from '../share/contact';
   providedIn: 'root'
 })
 export class ContactService {
-  private serviceURL = 'https://todolist-f6b44-default-rtdb.firebaseio.com/contact.json';
+  private serviceURL = 'https://contact-2576a-default-rtdb.firebaseio.com/contact.json';
+  
  
 
   constructor(private http: HttpClient) { 

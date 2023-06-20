@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { ContactService } from '../service/contact.service';
 import { Contact } from '../share/contact';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-countact',
@@ -9,12 +10,27 @@ import { Contact } from '../share/contact';
 })
 export class CountactComponent implements OnInit{
   contactArr: Contact[] = [];
-  newContact!: Contact;
-  constructor(private contactService: ContactService){}
+  newContact: Contact = new Contact();
+  name: string = "";
+  email: string = "";
+  subject: string = "";
+  message: string = "";
+  contactForm!: FormGroup;
+  
+  constructor(private contactService: ContactService, private formBuilder: FormBuilder){
+    this.contactForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', Validators.required, Validators.email],
+      subject: ['', Validators.required],
+      message: ['', Validators.required],
+
+    })
+
+  }
 
   ngOnInit(): void {
     this.getContact();
-    this.addContact();
+    // this.addContact();
       
   }
   getContact(){
@@ -28,14 +44,26 @@ export class CountactComponent implements OnInit{
     )
   }
 
-  addContact(){
+  addContact(): void {
+    this.newContact.name = this.name;
+    this.newContact.email = this.email;
+    this.newContact.subject = this.subject;
+    this.newContact.message = this.message;
+
     this.contactService.addContact(this.newContact).subscribe(
       (contact: Contact) => {
         this.contactArr.push(contact);
+        console.log(this.contactArr);
+        
+         // Clear input fields
+         this.name = '';
+         this.email = '';
+         this.subject = '';
+         this.message = '';
       },
       (err: any) => {
         console.log('Unable to add contact:', err);
-      } 
-    )
+      }
+    );
   }
 }
