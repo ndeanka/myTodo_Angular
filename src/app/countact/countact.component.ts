@@ -1,47 +1,37 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../service/contact.service';
 import { Contact } from '../share/contact';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-countact',
+  selector: 'app-contact',
   templateUrl: './countact.component.html',
   styleUrls: ['./countact.component.css']
 })
-export class CountactComponent implements OnInit{
+export class CountactComponent implements OnInit {
   contactArr: Contact[] = [];
   newContact: Contact = new Contact();
-  name: string = "";
-  email: string = "";
-  subject: string = "";
-  message: string = "";
-  contactForm!: FormGroup;
-  
-  constructor(private contactService: ContactService, private formBuilder: FormBuilder){
-    this.contactForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required, Validators.email],
-      subject: ['', Validators.required],
-      message: ['', Validators.required],
+  name: string = '';
+  email: string = '';
+  subject: string = '';
+  message: string = '';
 
-    })
-
-  }
+  constructor(private contactService: ContactService) {}
 
   ngOnInit(): void {
-    this.getContact();
-    // this.addContact();
-      
+    if (this.contactArr.length === 0) {
+      this.getContact();
+    }
   }
-  getContact(){
+
+  getContact(): void {
     this.contactService.getContacts().subscribe(
       (contact: Contact[]) => {
-        this.contactArr = contact
+        this.contactArr = contact;
       },
       (err: any) => {
-        console.log('Unable to get list of tasks:', err);
+        console.log('Unable to get list of contacts:', err);
       }
-    )
+    );
   }
 
   addContact(): void {
@@ -54,12 +44,12 @@ export class CountactComponent implements OnInit{
       (contact: Contact) => {
         this.contactArr.push(contact);
         console.log(this.contactArr);
-        
-         // Clear input fields
-         this.name = '';
-         this.email = '';
-         this.subject = '';
-         this.message = '';
+
+        // Clear input fields
+        this.name = '';
+        this.email = '';
+        this.subject = '';
+        this.message = '';
       },
       (err: any) => {
         console.log('Unable to add contact:', err);
