@@ -40,20 +40,20 @@
           <div class="row">
             <div class="form-group col-md-6">
               <label for="name">Your Name</label>
-              <input type="text" name="name" class="form-control" id="name" required [(ngModel)] = "name">
+              <input type="text" name="name" class="form-control" id="name" required [(ngModel)]="name">
             </div>
             <div class="form-group col-md-6">
               <label for="name">Your Email</label>
-              <input type="email" class="form-control" name="email" id="email" required [(ngModel)] = "email">
+              <input type="email" class="form-control" name="email" id="email" required [(ngModel)]="email">
             </div>
           </div>
           <div class="form-group">
             <label for="name">Subject</label>
-            <input type="text" class="form-control" name="subject" id="subject" required [(ngModel)] = "subject">
+            <input type="text" class="form-control" name="subject" id="subject" required [(ngModel)]="subject">
           </div>
           <div class="form-group">
             <label for="name">Message</label>
-            <textarea class="form-control" name="message" rows="10" required [(ngModel)] = "message"></textarea>
+            <textarea class="form-control" name="message" rows="10" required [(ngModel)]="message"></textarea>
           </div>
           <div class="my-3">
             <div class="loading">Loading</div>
@@ -62,13 +62,39 @@
           </div>
           <div class="text-center">
             <!-- <button type="submit" [disabled]="!contactForm">Send Message</button> -->
-            <!-- <button type="submit" [disabled]="contactForm.invalid">Send Message</button> -->
             <button type="submit" (click)="addContact()">Send Message</button>
 
           </div>
         </form>
       </div>
     </div>
-
+  </div>
+</section>
+<section class="contact">
+  <div class="container">
+    <div class="section-title">
+      <h2>Comment</h2>
+    </div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Subject</th>
+        <th>Message</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor=" let contact of contactArr">
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.email }}</td>
+        <td>{{ contact.subject }}</td>
+        <td>{{ contact.message }}</td>
+        <i class="fas fa-edit text-primary me-2" (click)="deleteContact(contact.id)"></i>
+        <i class="fas fa-times text-primary"></i>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </section>

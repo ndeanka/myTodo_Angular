@@ -39,15 +39,15 @@ export class ToDoComponent implements OnInit {
     this.todoService.getAllTodoList().subscribe(
       (tasks: Task[]) => {
         this.taskArr = tasks;
-        console.log(this.taskArr);
+        // console.log(this.taskArr);
       },
       error => {
         console.log('Unable to get list of tasks:', error);
         alert('Unable to get list of tasks');
       },
-      () => {
-        console.log('Done loading tasks');
-      }
+      // () => {
+      //   console.log('Done loading tasks');
+      // }
     );
   }
 
