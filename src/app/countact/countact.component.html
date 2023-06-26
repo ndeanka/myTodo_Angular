@@ -40,20 +40,27 @@
           <div class="row">
             <div class="form-group col-md-6">
               <label for="name">Your Name</label>
-              <input type="text" name="name" class="form-control" id="name" required ngModel>
+              <input type="text" name="name" class="form-control" id="name" required ngModel #name="ngModel">
+              <small *ngIf="name.invalid && name.touched">Name is a required field</small>
+
             </div>
             <div class="form-group col-md-6">
               <label for="name">Your Email</label>
-              <input type="email" class="form-control" name="email" id="email" required ngModel>
+              <input type="email" class="form-control" name="email" id="email" required email ngModel #email="ngModel">
+              <small *ngIf="email.invalid && email.touched">email is a required field</small>
+
             </div>
           </div>
           <div class="form-group">
             <label for="name">Subject</label>
-            <input type="text" class="form-control" name="subject" id="subject" required ngModel>
+            <input type="text" class="form-control" name="subject" id="subject" required ngModel #subject="ngModel">
+            <small *ngIf="subject.invalid && subject.touched">subject is a required field</small>
+
           </div>
           <div class="form-group">
             <label for="name">Message</label>
-            <textarea class="form-control" name="message" rows="10" required ngModel></textarea>
+            <textarea class="form-control" name="message" rows="10" required ngModel #message="ngModel"></textarea>
+            <small *ngIf="message.invalid && message.touched">Message is a required field</small>
           </div>
           <div class="my-3">
             <div class="loading">Loading</div>
@@ -63,7 +70,7 @@
           <div class="text-center">
             <!-- <button type="submit" [disabled]="!contactForm">Send Message</button> -->
             <!-- <button type="submit" (click)="addContact()">Send Message</button> -->
-            <button type="submit">Send Message</button>
+            <button type="submit" [disabled]="!myForm.valid">Send Message</button>
 
 
           </div>
