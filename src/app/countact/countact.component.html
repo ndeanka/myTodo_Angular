@@ -36,24 +36,24 @@
       </div>
 
       <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-        <form action="" method="post" role="form" class="php-email-form">
+        <form action="" method="post" role="form" class="php-email-form" (ngSubmit)="addContact()" #myForm="ngForm">
           <div class="row">
             <div class="form-group col-md-6">
               <label for="name">Your Name</label>
-              <input type="text" name="name" class="form-control" id="name" required [(ngModel)]="name">
+              <input type="text" name="name" class="form-control" id="name" required ngModel>
             </div>
             <div class="form-group col-md-6">
               <label for="name">Your Email</label>
-              <input type="email" class="form-control" name="email" id="email" required [(ngModel)]="email">
+              <input type="email" class="form-control" name="email" id="email" required ngModel>
             </div>
           </div>
           <div class="form-group">
             <label for="name">Subject</label>
-            <input type="text" class="form-control" name="subject" id="subject" required [(ngModel)]="subject">
+            <input type="text" class="form-control" name="subject" id="subject" required ngModel>
           </div>
           <div class="form-group">
             <label for="name">Message</label>
-            <textarea class="form-control" name="message" rows="10" required [(ngModel)]="message"></textarea>
+            <textarea class="form-control" name="message" rows="10" required ngModel></textarea>
           </div>
           <div class="my-3">
             <div class="loading">Loading</div>
@@ -62,7 +62,9 @@
           </div>
           <div class="text-center">
             <!-- <button type="submit" [disabled]="!contactForm">Send Message</button> -->
-            <button type="submit" (click)="addContact()">Send Message</button>
+            <!-- <button type="submit" (click)="addContact()">Send Message</button> -->
+            <button type="submit">Send Message</button>
+
 
           </div>
         </form>

@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ContactService} from '../service/contact.service';
 import {Contact} from '../share/contact';
 import {filter, Observable} from "rxjs";
 import { Task } from '../share/task';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
@@ -17,6 +18,8 @@ export class CountactComponent implements OnInit {
   subject: string = '';
   message: string = '';
   Object: any;
+  @ViewChild('myForm')
+  form!: NgForm;
 
   constructor(private contactService: ContactService) {
   }
@@ -48,19 +51,14 @@ export class CountactComponent implements OnInit {
     this.contactService.addContact(this.newContact).subscribe(
       (contact: Contact) => {
         this.contactArr.push(contact);
-        // console.log(this.contactArr);
-
-        // Clear input fields
-        // this.name = '';
-        // this.email = '';
-        // this.subject = '';
-        // this.message = '';
       },
       (err: any) => {
         console.log('Unable to add contact:', err);
 
       }
     );
+
+    console.log(this.form);
   }
 
   deleteContact(contact: any) {
