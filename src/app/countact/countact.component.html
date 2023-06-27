@@ -37,35 +37,41 @@
 
       <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
         <form action="" method="post" role="form" class="php-email-form" (ngSubmit)="addContact()" #myForm="ngForm">
+          <div ngModelGroup="formGroup" #formGroup="ngModelGroup">
           <div class="row">
             <div class="form-group col-md-6">
               <label for="name">Your Name</label>
               <input type="text" name="name" class="form-control" id="name" required ngModel #name="ngModel">
-              <small *ngIf="name.invalid && name.touched">Name is a required field</small>
+              <!-- <small *ngIf="name.invalid && name.touched">Name is a required field</small> -->
 
             </div>
             <div class="form-group col-md-6">
               <label for="name">Your Email</label>
               <input type="email" class="form-control" name="email" id="email" required email ngModel #email="ngModel">
-              <small *ngIf="email.invalid && email.touched">email is a required field</small>
+              <!-- <small *ngIf="email.invalid && email.touched">email is a required field</small> -->
 
             </div>
           </div>
           <div class="form-group">
             <label for="name">Subject</label>
             <input type="text" class="form-control" name="subject" id="subject" required ngModel #subject="ngModel">
-            <small *ngIf="subject.invalid && subject.touched">subject is a required field</small>
+            <!-- <small *ngIf="subject.invalid && subject.touched">subject is a required field</small> -->
 
           </div>
           <div class="form-group">
             <label for="name">Message</label>
             <textarea class="form-control" name="message" rows="10" required ngModel #message="ngModel"></textarea>
-            <small *ngIf="message.invalid && message.touched">Message is a required field</small>
+            <!-- <small *ngIf="message.invalid && message.touched">Message is a required field</small> -->
           </div>
+          <div>
+            <small *ngIf="formGroup.invalid && formGroup.touched">Some of required field don't have data</small>
+          </div>
+        </div>
+ 
           <div class="my-3">
             <div class="loading">Loading</div>
             <div class="error-message"></div>
-            <div class="sent-message">Your message has been sent. Thank you!</div>
+            <div class="sent-message" >Your message has been sent. Thank you!</div>
           </div>
           <div class="text-center">
             <!-- <button type="submit" [disabled]="!contactForm">Send Message</button> -->
