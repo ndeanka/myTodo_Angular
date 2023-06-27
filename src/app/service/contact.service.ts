@@ -44,6 +44,7 @@ export class ContactService {
   }
 
   deleteContact(id: string): Observable<Contact> {
-    return this.http.delete<Contact>(`this.serviceURL/${id}`)
+  const serviceURL = `https://contact-2576a-default-rtdb.firebaseio.com/contact/${id}.json`;
+    return this.http.delete<Contact>(serviceURL);
   }
 }

@@ -2,8 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ContactService} from '../service/contact.service';
 import {Contact} from '../share/contact';
 import {filter, Observable} from "rxjs";
-import { Task } from '../share/task';
-import { NgForm } from '@angular/forms';
+import {Task} from '../share/task';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 })
 export class CountactComponent implements OnInit {
   contactArr: Contact[] = [];
-  newContact: Contact = new Contact();
+  // newContact: Contact = new Contact();
   name: string = '';
   email: string = '';
   subject: string = '';
@@ -43,12 +43,23 @@ export class CountactComponent implements OnInit {
   }
 
   addContact(): void {
-    this.newContact.name = this.name;
-    this.newContact.email = this.email;
-    this.newContact.subject = this.subject;
-    this.newContact.message = this.message;
+    this.name = this.form.value.formGroup.name;
+    this.email = this.form.value.formGroup.email;
+    this.subject = this.form.value.formGroup.subject;
+    this.message = this.form.value.formGroup.message;
 
-    this.contactService.addContact(this.newContact).subscribe(
+    // Create a new Contact object
+    const newContact: Contact = {
+      name: this.name,
+      email: this.email,
+      subject: this.subject,
+      message: this.message
+    };
+
+    // reset form
+    this.form.reset()
+
+    this.contactService.addContact(newContact).subscribe(
       (contact: Contact) => {
         this.contactArr.push(contact);
       },
