@@ -12,7 +12,7 @@
                 <div class="h4 d-flex justify-content-center text-primary">My To-do List</div>
                 <div class="input-group mb-3">
                   <input type="text" class="form-control" placeholder="Add To-do list" aria-label="Recipient's username"
-                    aria-describedby="button-addon2" [(ngModel)]="description" name="description">
+                    aria-describedby="button-addon2" [(ngModel)]="description" required name="description" ngModel>
                   <button class="btn btn-primary" type="submit" id="button-addon2" [disabled]="!myForm.valid">+</button>
 
                 </div>

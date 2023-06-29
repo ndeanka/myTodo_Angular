@@ -15,6 +15,8 @@ export class ToDoComponent implements OnInit {
   taskArr: Task[] = [];
   @ViewChild('myForm')
   form!: NgForm;
+  status!: boolean;
+  id: string= "";
 
   constructor(private todoService: TodoList) {}
 
@@ -41,9 +43,9 @@ export class ToDoComponent implements OnInit {
     this.description = this.form.value.formGroup.description;
 
 const newTask: Task = {
-  description: this.taskObj.description,
-  status: this.taskObj.status,
-  id: this.taskObj.id,  
+  description: this.description,
+  status: this.status,
+  id: this.id,  
 }
 
   this.form.reset();
