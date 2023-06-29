@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TodoList } from '../service/todo.service';
 import { Task } from '../share/task';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-to-do',
@@ -10,30 +11,58 @@ import { Task } from '../share/task';
 export class ToDoComponent implements OnInit {
   description: string = "";
   editTaskValue: string = "";
-
   taskObj: Task = new Task();
   taskArr: Task[] = [];
+  @ViewChild('myForm')
+  form!: NgForm;
 
   constructor(private todoService: TodoList) {}
 
   ngOnInit(): void {
     this.getAllTodoList();
     this.editTaskValue = '';
-    this.description = '';
+    // this.description = '';
   }
 
-  addTodo(): void {
-    this.taskObj.description = this.description;
-    this.todoService.addTodoList(this.taskObj).subscribe(
-      () => {
-        this.ngOnInit();
-        this.description = '';
+  // addTodo(): void {
+  //   this.taskObj.description = this.description;
+  //   this.todoService.addTodoList(this.taskObj).subscribe(
+  //     () => {
+  //       this.ngOnInit();
+  //       this.description = '';
+  //     },
+  //     error => {
+  //       alert(error);
+  //     }
+  //   );
+  // }
+
+  addTodo(){
+    this.description = this.form.value.formGroup.description;
+
+const newTask: Task = {
+  description: this.taskObj.description,
+  status: this.taskObj.status,
+  id: this.taskObj.id,  
+}
+
+  this.form.reset();
+
+    this.todoService.addTodoList(newTask).subscribe(
+      (todo: Task)=> {
+        this.taskArr.push(todo);
+        console.log(todo);
       },
       error => {
         alert(error);
+      },
+      () => {
+        this.ngOnInit();
       }
-    );
-  }
+
+    )
+  };
+  
 
   getAllTodoList(): void {
     this.todoService.getAllTodoList().subscribe(

@@ -38,6 +38,9 @@ export class CountactComponent implements OnInit {
       },
       (err: any) => {
         console.log('Unable to get list of contacts:', err);
+      },
+       () => {
+        this.ngOnInit();
       }
     );
   }
