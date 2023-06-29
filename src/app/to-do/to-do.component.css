@@ -49,3 +49,8 @@ section {
 .section-title p {
   margin-bottom: 0;
 }
+
+.nav-link.active {
+  background: #149ddd;
+  color: white;
+}

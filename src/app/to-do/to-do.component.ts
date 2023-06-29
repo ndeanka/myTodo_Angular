@@ -18,6 +18,9 @@ export class ToDoComponent implements OnInit {
   status!: boolean;
   id: string= "";
 
+
+  isButtonActive: boolean = false;
+
   constructor(private todoService: TodoList) {}
 
   ngOnInit(): void {
@@ -67,6 +70,7 @@ const newTask: Task = {
   
 
   getAllTodoList(): void {
+     this.isButtonActive = !this.isButtonActive;
     this.todoService.getAllTodoList().subscribe(
       (tasks: Task[]) => {
         this.taskArr = tasks;
@@ -83,6 +87,7 @@ const newTask: Task = {
   }
 
   activeTask(): void {
+    //  this.isButtonActive = true;
     this.todoService.getAllTodoList().subscribe(
       (tasks: Task[]) => {
         this.taskArr = tasks.filter(task => !task.status);
@@ -94,6 +99,7 @@ const newTask: Task = {
   }
 
   completedTask(): void {
+    //  this.isButtonActive = !this.isButtonActive;
     this.todoService.getAllTodoList().subscribe(
       (tasks: Task[]) => {
         this.taskArr = tasks.filter(task => task.status);
