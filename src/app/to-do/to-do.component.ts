@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TodoList } from '../service/todo.service';
 import { Task } from '../share/task';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-to-do',
@@ -18,6 +18,9 @@ export class ToDoComponent implements OnInit {
   status!: boolean;
   id: string= "";
 
+  // reactive form
+  reactiveForm!: FormGroup;
+
 
   isButtonActive: boolean = false;
 
@@ -27,6 +30,11 @@ export class ToDoComponent implements OnInit {
     this.getAllTodoList();
     this.editTaskValue = '';
     // this.description = '';
+    
+  // reactive form
+    this.reactiveForm = new FormGroup({
+      description: new FormControl(null);
+    });
   }
 
   // addTodo(): void {

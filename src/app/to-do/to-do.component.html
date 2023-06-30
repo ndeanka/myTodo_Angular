@@ -7,18 +7,22 @@
       <div class="col col-xl-10">
         <div class="card">
           <div class="card-body">
-            <form action="" (ngSubmit)="addTodo()" #myForm="ngForm">
+            <!-- <form action="" (ngSubmit)="addTodo()" #myForm="ngForm"> -->
+            <form action="" [formGroup]="reactiveForm">
               <div class="form-group mt-4" ngModelGroup="formGroup" #formGroup="ngModelGroup">
                 <div class="h4 d-flex justify-content-center text-primary">My To-do List</div>
                 <div class="input-group mb-3">
                   <input type="text" class="form-control" placeholder="Add To-do list" aria-label="Recipient's username"
-                    aria-describedby="button-addon2" [(ngModel)]="description" required name="description" ngModel>
-                  <button class="btn btn-primary" type="submit" id="button-addon2" [disabled]="!myForm.valid">+</button>
+                    aria-describedby="button-addon2" [(ngModel)]="description" required name="description" ngModel
+                    formControlName="description">
+                  <!-- <button class="btn btn-primary" type="submit" id="button-addon2" [disabled]="!myForm.valid">+</button> -->
+                  <button class="btn btn-primary" type="submit" id="button-addon2">+</button>
+
 
                 </div>
               </div>
               <div>
-                <small *ngIf="formGroup.invalid && formGroup.touched">Description is required</small>
+                <small *ngIf=" formGroup.invalid && formGroup.touched">Description is required</small>
               </div>
             </form>
 
