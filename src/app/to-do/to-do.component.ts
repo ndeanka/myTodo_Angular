@@ -33,7 +33,7 @@ export class ToDoComponent implements OnInit {
     
   // reactive form
     this.reactiveForm = new FormGroup({
-      description: new FormControl(null);
+      description: new FormControl(null)
     });
   }
 
@@ -146,8 +146,9 @@ const newTask: Task = {
 
   deleteTodoList(todo: Task): void {
     this.todoService.deleteTodoList(todo.id).subscribe(
-      () => {
-        this.taskArr = this.taskArr.filter(item => item.id !== todo.id);
+      (res) => {
+        alert('Task deleted successfully')
+        // this.taskArr = this.taskArr.filter(item => item.id !== todo.id);
       },
       error => {
         console.error('Failed to delete task:', error);
